@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>表格</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/iconfont-Tab.css">
+</head>
+
+<body>
+    <div class="head">
+        <span class="iconfont-Tab icon-jiantou1" id="left"></span>
+        <span class="tab-Two iconfont icon-jiantou" id="right"></span>
+    </div>
+    <table border="1" cellpadding="0" cellspacing="0" id="current">
+        <thead>
+            <tr>
+                <th>关键词</th>
+                <th>昨天</th>
+                <th class="bank">3/11</th>
+                <th class="bank">3/12</th>
+                <th class="bank">3/13</th>
+                <th class="bank">3/14</th>
+                <th class="bank">3/15</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="bounce">123</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="bounce">124</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $('#current').find("td.bounce").click(function() {
+           location.href = "index-chart.html?keyword=123";
+    });
+
+
+    // 获取时间
+    var now = new Date();
+    var arr = [];  
+    var after = new Date().getTime(); 
+    var change = "";
+    var month = "";
+    function addDate(day) { 
+         // console.log(now)
+         arr.length =0;
+         for (var i = 0; i < 5; i++) {
+               after = after + 1000 * 60 * 60 * 24 * (day);
+               console.log(typeof after)
+               change = now.setTime(after);
+               change = new Date(change);
+               month = change.getMonth()+1;
+               change = month+"/"+change.getDate();
+               // console.info(after,change);   
+                  arr.push(change);
+                    }
+        // console.log(arr); 
+    }
+    //dianji
+    $("#left").click(function() {
+        addDate(-1);
+        tar();
+        $.ajax({
+            url: 'mock/table1.json',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                param1: 'value1'
+            },
+            success:function(data){
+                  // alert("chenggong")
+            },
+            error:function(msg) {
+                // alert(msg);
+            }
+        });
+    });
+    // dianji
+    $("#right").click(function() {
+        addDate(1);
+        tar();
+         $.ajax({
+            url: 'mock/table1.json',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                param1: 'value1'
+            },
+            success:function(data){
+                  // alert("chenggong")
+            },
+            error:function(msg) {
+                // alert(msg);
+            }
+        });
+    });
+    //quneirong
+    function tar() {
+        var s = $("#current").find(".bank");
+        for (var i = 0; i < arr.length; i++) {
+            (function(i) {
+                console.log(s[i])
+                $(s[i])[0].innerHTML = '<th>' + arr[i] + '<\/th>';
+            })(i)
+        }
+        var str = '';
+    }
+    // $.ajax({
+    //     url: 'mock/table1.json',
+    //     type: 'get',
+    //     dataType: "json",
+    //     success: function(data) {
+    //         var ary = data.list,
+    //             thAry = [],
+    //             index = 0; 
+    //         $('#current').find('th').each(function() {
+    //             var _val = $(this).html();
+    //             thAry.push(_val)
+    //         });
+
+    //         for (var i = ary.length - 1; i >= 0; i--) {
+    //             index = getIndex(ary[i].key,thAry);
+    //             console.log(ary[j]);
+
+
+    //             $('#current').find('tr').each(function(i) {
+    //                 for (var j = ary[j].data.length - 1; j >= 0; j--) {
+    //                     console.log(ary[i].data[j]);
+    //                 }
+    //                 $(this).find('td').eq(0).html(ary[i].data[0].keyword)                 
+    //             })
+    //         }
+
+    //     },
+    //     error:function(data) {
+    //         console.log(data);
+    //     }
+
+    // });
+
+    // function getIndex(key,ary) {
+    //      for (var j = ary.length - 1; j >= 0; j--) {
+    //          // console.log(ary[j]);
+    //          if(ary[j] == key) {
+    //             return j;
+    //          }
+    //     }
+    //     return -1;
+    // }
+    </script>
+</body>
+
+</html>

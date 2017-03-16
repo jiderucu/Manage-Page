@@ -1,0 +1,19 @@
+
+@font-face {font-family: "iconfont";
+  src: url('../soure-Tab/iconfont.eot?t=1489716197005'); /* IE9*/
+  src: url('../soure-Tab/iconfont.eot?t=1489716197005#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../soure-Tab/iconfont.woff?t=1489716197005') format('woff'), /* chrome, firefox */
+  url('../soure-Tab/iconfont.ttf?t=1489716197005') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../soure-Tab/iconfont.svg?t=1489716197005#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont-Tab {
+  font-family:"iconfont" !important;
+  font-size:20px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jiantou1:before { content: "\e627"; }
+
